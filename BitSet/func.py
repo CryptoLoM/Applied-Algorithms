@@ -37,7 +37,7 @@ def run_experiment(set_size, num_trials, num_elements):
 
     return results
 
-# Перевірка для елементу, який точно не може бути у множин
-non_existing_element = set_size + 1  
-search_time_non_existing = measure_time(A.search, non_existing_element)
-results["search_non_existing"].append(search_time_non_existing)
+    # Перевірка для елементу, який точно не може бути у множин
+    non_existing_element = set_size + 1
+    search_time_non_existing = measure_time(A.search, non_existing_element)
+    results["search_non_existing"].append(search_time_non_existing)
