@@ -1,12 +1,12 @@
-from main import BitSet
+from main import SetOperations
 import time
 import random
 
 def generate_random_set(size, num_elements):
-    bitset = BitSet(size)
+    my_set = SetOperations()
     for _ in range(num_elements):
-        bitset.insert(random.randint(0, size - 1))
-    return bitset
+        my_set.insert(random.randint(0, size - 1))
+    return my_set
 
 # Функція для вимірювання часу виконання операцій
 def measure_time(func, *args):
@@ -16,7 +16,7 @@ def measure_time(func, *args):
 
 # Експериментальна оцінка часу роботи операцій
 def run_experiment(set_size, num_trials, num_elements):
-    results = {"insert": [], "search": [], "union": []}
+    results = {"insert": [], "search": [], "union": [], "search_non_existing": []}
 
     for _ in range(num_trials):
         A = generate_random_set(set_size, num_elements)
@@ -35,9 +35,9 @@ def run_experiment(set_size, num_trials, num_elements):
         union_time = measure_time(A.union, B)
         results["union"].append(union_time)
 
-    return results
+        # Вимірюємо час пошуку елементу, якого немає у множині
+        non_existing_element = set_size + 1  # Це точно не існуючий елемент
+        search_non_existing_time = measure_time(A.search, non_existing_element)
+        results["search_non_existing"].append(search_non_existing_time)
 
-    # Перевірка для елементу, який точно не може бути у множин
-    non_existing_element = set_size + 1
-    search_time_non_existing = measure_time(A.search, non_existing_element)
-    results["search_non_existing"].append(search_time_non_existing)
+    return results

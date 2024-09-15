@@ -1,60 +1,52 @@
-class BitSet:
-    def __init__(self, size):
-        # Розмір множини, кількість цілих чисел (64 біти на кожне число)
-        self.size = size
-        self.array = [0] * ((size + 63) // 64)
+class SetOperations:
+    def __init__(self):
+        # Ініціалізація порожньої множини
+        self.set_data = set()
 
     def insert(self, x):
         # Вставка елемента у множину
-        if 0 <= x < self.size:
-            self.array[x // 64] |= (1 << (x % 64))
+        self.set_data.add(x)
 
     def delete(self, x):
-        # Видалення елемента з множини
-        if 0 <= x < self.size:
-            self.array[x // 64] &= ~(1 << (x % 64))
+        # Видалення елемента з множини, якщо він існує
+        self.set_data.discard(x)
 
     def search(self, x):
         # Пошук елемента у множині
-        if 0 <= x < self.size:
-            return bool(self.array[x // 64] & (1 << (x % 64)))
-        return False
+        return x in self.set_data
 
     def clear(self):
         # Очищення множини
-        self.array = [0] * ((self.size + 63) // 64)
+        self.set_data.clear()
 
     def union(self, other):
         # Об'єднання двох множин
-        result = BitSet(self.size)
-        for i in range(len(self.array)):
-            result.array[i] = self.array[i] | other.array[i]
+        result = SetOperations()
+        result.set_data = self.set_data.union(other.set_data)
         return result
 
     def intersection(self, other):
         # Перетин двох множин
-        result = BitSet(self.size)
-        for i in range(len(self.array)):
-            result.array[i] = self.array[i] & other.array[i]
+        result = SetOperations()
+        result.set_data = self.set_data.intersection(other.set_data)
         return result
 
     def set_difference(self, other):
         # Різниця між множинами (A - B)
-        result = BitSet(self.size)
-        for i in range(len(self.array)):
-            result.array[i] = self.array[i] & ~other.array[i]
+        result = SetOperations()
+        result.set_data = self.set_data.difference(other.set_data)
         return result
 
     def sym_difference(self, other):
         # Симетрична різниця між множинами
-        result = BitSet(self.size)
-        for i in range(len(self.array)):
-            result.array[i] = self.array[i] ^ other.array[i]
+        result = SetOperations()
+        result.set_data = self.set_data.symmetric_difference(other.set_data)
         return result
 
     def is_subset(self, other):
         # Перевірка, чи є одна множина підмножиною іншої
-        for i in range(len(self.array)):
-            if (self.array[i] & other.array[i]) != self.array[i]:
-                return False
-        return True
+        return self.set_data.issubset(other.set_data)
+
+    def __repr__(self):
+        # Виведення множини як рядок
+        return f"SetOperations({self.set_data})"

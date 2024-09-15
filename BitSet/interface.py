@@ -1,6 +1,5 @@
 from func import run_experiment
 import matplotlib.pyplot as plt
-# Функція для побудови графіків
 def plot_results(results, set_sizes):
     for operation in results.keys():
         times = [sum(results[operation][size]) / len(results[operation][size]) for size in set_sizes]
@@ -19,7 +18,7 @@ num_trials = 1000  # Кількість спроб для кожної опер�
 num_elements = 1000  # Кількість елементів у випадковій множині
 
 # Збір результатів
-experiment_results = { "insert": {}, "search": {}, "union": {} }
+experiment_results = {"insert": {}, "search": {}, "union": {}, "search_non_existing": {} }
 for size in set_sizes:
     results = run_experiment(size, num_trials, num_elements)
     for operation in results:
