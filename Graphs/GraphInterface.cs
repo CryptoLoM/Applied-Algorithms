@@ -42,18 +42,22 @@ namespace Graph
         static void Main(string[] args)
         {
             Console.WriteLine("Enter the number of vertices in the graph:");
-            int numberOfVertices = int.Parse(Console.ReadLine() ?? "0"); 
+            int numberOfVertices = int.Parse(Console.ReadLine() ?? "0");
 
             var randomGraph = new UndirectedGraph(numberOfVertices);
 
             randomGraph.AddEdge(0, 1);
             randomGraph.AddEdge(1, 2);
             randomGraph.AddEdge(0, 2);
-            
-            GraphVisualizer.VisualizeAsEdgeList(randomGraph);
-           
+
+            // Конвертуємо список суміжності в матрицю
             int[,] adjacencyMatrix = GraphConverter.ConvertAdjacencyListToMatrix(randomGraph.AdjacencyList);
+            // Візуалізація графа у вигляді матриці
             GraphVisualizer.VisualizeAsMatrix(adjacencyMatrix);
+
+            // Підрахунок кількості вершин і ребер
+            Console.WriteLine($"Vertices Count: {randomGraph.GetVerticesCount()}");
+            Console.WriteLine($"Edges Count: {randomGraph.GetEdgesCount()}");
         }
     }
 }
