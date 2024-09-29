@@ -1,31 +1,31 @@
 ﻿using System.Collections.Generic;
 
-
 namespace Graph
 {
-    //weighted and unweighted directed graph
+    //weighthed directed graph
     public class DirectedGraph : Graph
     {
-        protected List<List<int>> adjacencyList;
+        protected List<Dictionary<int, int>> adjacencyList; // 
 
         public DirectedGraph(int vertices) : base(vertices)
         {
-            adjacencyList = new List<List<int>>(vertices);
+            adjacencyList = new List<Dictionary<int, int>>(vertices);
             for (int i = 0; i < vertices; i++)
             {
-                adjacencyList.Add(new List<int>());
+                adjacencyList.Add(new Dictionary<int, int>());
             }
         }
 
         public override void AddVertex()
         {
-            adjacencyList.Add(new List<int>());
+            adjacencyList.Add(new Dictionary<int, int>());
             verticesCount++;
         }
 
         public override void RemoveVertex(int vertex)
         {
-            foreach (var neighbor in adjacencyList[vertex])
+            
+            foreach (var neighbor in adjacencyList[vertex].Keys)
             {
                 adjacencyList[neighbor].Remove(vertex);
                 edgesCount--;
@@ -36,9 +36,9 @@ namespace Graph
 
         public override void AddEdge(int vertex1, int vertex2, int weight = 1)
         {
-            if (!adjacencyList[vertex1].Contains(vertex2))
+            if (!adjacencyList[vertex1].ContainsKey(vertex2))
             {
-                adjacencyList[vertex1].Add(vertex2);
+                adjacencyList[vertex1][vertex2] = weight; 
                 edgesCount++;
             }
         }

@@ -3,7 +3,7 @@
 
 namespace Graph
 {
-    // Weighted and weighted undirected graph
+    // Unweighted undirected graph
     public class UndirectedGraph : Graph
     {
         

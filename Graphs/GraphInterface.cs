@@ -27,30 +27,33 @@ namespace Graph
             {
                 foreach (int neighbor in graph.AdjacencyList[i])
                 {
-                    // Для того щоб уникнути повторів, виводимо лише у одному напрямку
+                    // Для того щоб уникнути повторів
                     if (i < neighbor)
                     {
                         Console.WriteLine($"{i} -- {neighbor}");
                     }
                 }
             }
-        }   
+        }
     }
 
     public class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Generation of a random undirected graph...");
-            var randomGraph = RandomGraphGenerator.GenerateRandomUndirectedGraph(5, 0.4);
+            Console.WriteLine("Enter the number of vertices in the graph:");
+            int numberOfVertices = int.Parse(Console.ReadLine() ?? "0"); 
 
-            // Граф у вигляді матриці суміжності
+            var randomGraph = new UndirectedGraph(numberOfVertices);
+
+            randomGraph.AddEdge(0, 1);
+            randomGraph.AddEdge(1, 2);
+            randomGraph.AddEdge(0, 2);
+            
+            GraphVisualizer.VisualizeAsEdgeList(randomGraph);
+           
             int[,] adjacencyMatrix = GraphConverter.ConvertAdjacencyListToMatrix(randomGraph.AdjacencyList);
             GraphVisualizer.VisualizeAsMatrix(adjacencyMatrix);
-
-            // Граф у вигляді списку ребер
-            GraphVisualizer.VisualizeAsEdgeList(randomGraph);
-
         }
     }
 }

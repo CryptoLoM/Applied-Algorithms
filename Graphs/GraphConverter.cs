@@ -50,7 +50,7 @@ namespace Graph
             {
                 foreach (var neighbor in adjacencyList[i])
                 {
-                    matrix[i, neighbor] = 1; // Устанавливаем 1 для несвязанного графа
+                    matrix[i, neighbor] = 1; 
                 }
             }
 
