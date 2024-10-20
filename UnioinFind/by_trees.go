@@ -54,7 +54,7 @@ func main() {
 
 	minCost, mst := Kruskal(edges, numVertices)
 
-	fmt.Printf("Мінімальна вартість: %d\n", minCost)
+	fmt.Printf("Мінімальна вага: %d\n", minCost)
 	fmt.Println("Ребра MST:")
 	for _, edge := range mst {
 		fmt.Printf("%d - %d (вага: %d)\n", edge.From, edge.To, edge.Weight)
