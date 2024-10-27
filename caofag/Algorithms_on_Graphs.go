@@ -93,12 +93,12 @@ func (g *Graph) FloydWarshall() [][]int {
 }
 
 // Генерація графа для тестування
-func GenerateGraph(numVertices, density int) *Graph {
+func GenerateGraph(random *rand.Rand, numVertices, density int) *Graph {
 	g := NewGraph(numVertices)
 	for i := 0; i < numVertices; i++ {
 		for j := i + 1; j < numVertices; j++ {
-			if rand.Intn(100) < density {
-				weight := rand.Intn(10) + 1
+			if random.Intn(100) < density {
+				weight := random.Intn(10) + 1
 				g.AddEdge(i, j, weight)
 			}
 		}
@@ -133,11 +133,11 @@ func createChart(dijkstraTime, floydTime int64) {
 }
 
 // Функція для тестування алгоритмів
-func TestAlgorithms() {
+func TestAlgorithms(random *rand.Rand) {
 	numVertices := 100
 	density := 30 // Щільність графу в процентах
 
-	g := GenerateGraph(numVertices, density)
+	g := GenerateGraph(random, numVertices, density)
 
 	// Тестування алгоритму Дейкстри
 	start := time.Now()
@@ -159,6 +159,9 @@ func TestAlgorithms() {
 }
 
 func main() {
-	rand.Seed(time.Now().UnixNano())
-	TestAlgorithms()
+	// Create a new random source
+	source := rand.NewSource(time.Now().UnixNano())
+	random := rand.New(source)
+
+	TestAlgorithms(random)
 }
