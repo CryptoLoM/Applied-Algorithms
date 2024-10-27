@@ -5,6 +5,10 @@ import (
 	"math"
 	"math/rand"
 	"time"
+	"os"
+
+	"github.com/go-echarts/go-echarts/v2/charts"
+	"github.com/go-echarts/go-echarts/v2/opts"
 )
 
 // Структура для зберігання графу
@@ -102,10 +106,36 @@ func GenerateGraph(numVertices, density int) *Graph {
 	return g
 }
 
+// Функція для створення діаграми
+func createChart(dijkstraTime, floydTime int64) {
+	bar := charts.NewBar()
+	bar.SetGlobalOptions(charts.WithTitleOpts(opts.Title{
+		Title: "Час виконання алгоритмів",
+	}))
+
+	// Додавання даних у графік
+	bar.SetXAxis([]string{"Дейкстра", "Флойд-Уоршелл"}).
+		AddSeries("Час (мс)", []opts.BarData{
+			{Value: dijkstraTime},
+			{Value: floydTime},
+		})
+
+	// Збереження графіку у файл
+	f, err := os.Create("output_chart.html")
+	if err != nil {
+		fmt.Println("Помилка створення файлу:", err)
+		return
+	}
+	defer f.Close()
+
+	bar.Render(f)
+	fmt.Println("Діаграма створена: output_chart.html")
+}
+
 // Функція для тестування алгоритмів
 func TestAlgorithms() {
 	numVertices := 100
-	density := 50 // Щільність графу в процентах
+	density := 30 // Щільність графу в процентах
 
 	g := GenerateGraph(numVertices, density)
 
@@ -114,17 +144,21 @@ func TestAlgorithms() {
 	for i := 0; i < numVertices; i++ {
 		g.Dijkstra(i)
 	}
-	elapsedDijkstra := time.Since(start).Milliseconds() 
+	elapsedDijkstra := time.Since(start).Milliseconds()
 
 	// Тестування алгоритму Флойда-Уоршелла
 	start = time.Now()
 	g.FloydWarshall()
-	elapsedFloydWarshall := time.Since(start).Milliseconds() 
+	elapsedFloydWarshall := time.Since(start).Milliseconds()
 
 	fmt.Printf("Час виконання Дейкстри: %d мс\n", elapsedDijkstra)
 	fmt.Printf("Час виконання Флойда-Уоршелла: %d мс\n", elapsedFloydWarshall)
+
+	// Створення діаграми
+	createChart(elapsedDijkstra, elapsedFloydWarshall)
 }
 
 func main() {
+	rand.Seed(time.Now().UnixNano())
 	TestAlgorithms()
 }
