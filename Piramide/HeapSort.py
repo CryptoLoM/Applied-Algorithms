@@ -12,10 +12,10 @@ def heap_sort(arr):
 
     print("Sorting the elements:")
     for max_index in range(n - 1, 0, -1):
-        print(f"Remaining to the sorted array: {max_index - 1} iteration(s)")
         arr[0], arr[max_index] = arr[max_index], arr[0]
         print_heap(arr)
         heapify(arr, max_index, 0)
+        print(f"Remaining to the sorted array: {max_index - 1} iteration(s)")
     print("The array is sorted!")
 
 
