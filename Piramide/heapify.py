@@ -5,11 +5,11 @@ from interface import *
 priority_queue = []
 
 # Додавання елементів у чергу
-heapq.heappush(priority_queue, (4, "element 2"))
-heapq.heappush(priority_queue, (2, "element 0"))
-heapq.heappush(priority_queue, (3, "element 1"))
-heapq.heappush(priority_queue, (1, "element -5"))
-heapq.heappush(priority_queue, (2, "element 0"))
+heapq.heappush(priority_queue, (4, "element 8"))
+heapq.heappush(priority_queue, (5, "element 16"))
+heapq.heappush(priority_queue, (3, "element 4"))
+heapq.heappush(priority_queue, (1, "element 1"))
+heapq.heappush(priority_queue, (2, "element 2"))
 
 # Отримання елемента з найвищим пріоритетом
 while priority_queue:
