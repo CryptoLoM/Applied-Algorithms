@@ -1,5 +1,4 @@
 import heapq
-from interface import *
 
 
 priority_queue = []
@@ -28,5 +27,5 @@ def heapify(arr, n, el_with_maxindex):
 
     if largest != el_with_maxindex:
         arr[el_with_maxindex], arr[largest] = arr[largest], arr[el_with_maxindex]
-        print_heap(arr)
+
         heapify(arr, n, largest)
