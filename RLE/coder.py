@@ -18,5 +18,3 @@ def rle_encode(input_file, output_file):
         compressed.extend([count, prev_byte])
 
         f_out.write(compressed)
-
-

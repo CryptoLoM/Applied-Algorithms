@@ -1,6 +1,5 @@
 from coder import  rle_encode
 from decoder import rle_decode
-# Основна функція для обробки аргументів командного рядка
 def main():
     input_file = "скала.jpg"  # Вхідний файл
     compressed_file = "скала.rle"  # Стиснений файл
