@@ -1,5 +1,4 @@
 import heapq
-import os
 from collections import defaultdict
 
 
@@ -125,7 +124,7 @@ def load_compressed_file(input_filename, output_filename):
             f_out.write(decoded_bytes)
 
 
-# Використання:
+
 input_file = "Лаб 1.docx"
 compressed_file = "compressed.Лаб 1.docx"
 decompressed_file = "output.Лаб 1.docx"
@@ -137,3 +136,4 @@ huffman_codes = build_huffman_codes(huffman_tree)
 
 save_compressed_file(input_file, compressed_file, huffman_codes, freq_table)
 load_compressed_file(compressed_file, decompressed_file)
+

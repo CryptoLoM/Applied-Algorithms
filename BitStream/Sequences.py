@@ -7,7 +7,7 @@ def write_bit_sequence(filename, bit_sequence):
     if os.path.exists(filename):
         with open(filename, "rb") as f:
             existing_bytes = f.read()
-        existing_bits = "".join(f"{byte:08b}" for byte in existing_bytes).rstrip("0")  # Видаляємо зайві нулі
+        existing_bits = "".join(f"{byte:08b}" for byte in existing_bytes)
 
     new_bits = existing_bits + bit_sequence
     byte_list = [int(new_bits[i:i + 8], 2) for i in range(0, len(new_bits), 8)]
