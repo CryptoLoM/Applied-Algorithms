@@ -1,1 +1,1 @@
-# Applied-algorithms and information transformation algorithms
+# Implementantion of mathematical models and information transformation algorithms
