@@ -51,7 +51,7 @@ def build_huffman_codes(node, prefix="", codebook=None):
     return codebook
 
 
-def save_compressed_file(input_filename, output_filename, codebook, freq_table):
+def encode_file(input_filename, output_filename, codebook, freq_table):
     with open(input_filename, "rb") as f_in, open(output_filename, "wb") as f_out:
         # Збереження таблиці частот (записуємо тільки наявні символи)
         f_out.write(len(freq_table).to_bytes(2, byteorder="big"))  # Кількість унікальних символів
@@ -78,7 +78,7 @@ def save_compressed_file(input_filename, output_filename, codebook, freq_table):
         f_out.write(byte_array)
 
 
-def load_compressed_file(input_filename, output_filename):
+def decode_file(input_filename, output_filename):
     with open(input_filename, "rb") as f_in:
         # Читаємо кількість унікальних символів
         num_symbols = int.from_bytes(f_in.read(2), byteorder="big")
@@ -125,15 +125,15 @@ def load_compressed_file(input_filename, output_filename):
 
 
 
-input_file = "Лаб 1.docx"
-compressed_file = "compressed.Лаб 1.docx"
-decompressed_file = "output.Лаб 1.docx"
+input_file = "la.txt"
+compressed_file = "compressedHuff.la.txt"
+decompressed_file = "outputHuff.la.txt"
 
 
 freq_table = build_frequency_table(input_file)
 huffman_tree = build_huffman_tree(freq_table)
 huffman_codes = build_huffman_codes(huffman_tree)
 
-save_compressed_file(input_file, compressed_file, huffman_codes, freq_table)
-load_compressed_file(compressed_file, decompressed_file)
+encode_file(input_file, compressed_file, huffman_codes, freq_table)
+decode_file(compressed_file, decompressed_file)
 
