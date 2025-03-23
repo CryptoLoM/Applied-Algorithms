@@ -81,4 +81,3 @@ decompressed_file = "outputLZW.la.txt"
 
 save_compressed_file(input_file, compressed_file)
 load_decompressed_file(compressed_file, decompressed_file)
-
